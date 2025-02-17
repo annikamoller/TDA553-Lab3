@@ -15,7 +15,7 @@ abstract class Car implements Movable {
         SOUTH,
         WEST
     }
-    public Direction direction = Direction.NORTH;
+    public Direction direction = Direction.EAST;
 
     public Car(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;
@@ -38,20 +38,20 @@ abstract class Car implements Movable {
     @Override
     public void turnLeft(){
         switch(direction){
-            case NORTH: direction = Direction.WEST;
-            case SOUTH: direction = Direction.EAST;
-            case EAST : direction = Direction.NORTH;
-            case WEST : direction = Direction.SOUTH;
+            case NORTH: direction = Direction.WEST;  break;
+            case SOUTH: direction = Direction.EAST;  break;
+            case EAST : direction = Direction.NORTH; break;
+            case WEST : direction = Direction.SOUTH; break;
         }
     }
 
     @Override
     public void turnRight(){
         switch(direction){
-            case NORTH: direction = Direction.EAST;
-            case SOUTH: direction = Direction.WEST;
-            case EAST : direction = Direction.SOUTH;
-            case WEST : direction = Direction.NORTH;
+            case NORTH: direction = Direction.EAST; break;
+            case SOUTH: direction = Direction.WEST; break;
+            case EAST : direction = Direction.SOUTH; break;
+            case WEST : direction = Direction.NORTH; break;
         }
     }
     

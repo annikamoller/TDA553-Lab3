@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.awt.Point;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -21,7 +22,7 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-    // ArrayList<ACar> cars = new ArrayList<>();
+    ArrayList<Car> cars = new ArrayList<>();
 
     //methods:
 
@@ -29,10 +30,22 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        // cc.cars.add(new Volvo240());
+        Volvo240 volvo = new Volvo240();
+        cc.cars.add(volvo);
+
+        Saab95 saab = new Saab95();
+        saab.setY(100);
+        cc.cars.add(saab);
+
+        Scania scania = new Scania();
+        scania.setY(200);
+        cc.cars.add(new Scania());
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
+        cc.frame.drawPanel.addCarToDictionary(volvo,new Point((int)volvo.getX(),(int)volvo.getY()));
+        cc.frame.drawPanel.addCarToDictionary(saab,new Point((int)saab.getX(),(int)saab.getY()));
+        cc.frame.drawPanel.addCarToDictionary(scania,new Point((int)scania.getX(),(int)scania.getY()));
 
         // Start the timer
         cc.timer.start();
@@ -43,23 +56,33 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
- /*           for (ACar car : cars) {
+            for (Car car : cars) {
                 car.move();
-                int x = (int) Math.round(car.getPosition().getX());
-                int y = (int) Math.round(car.getPosition().getY());
-                frame.drawPanel.moveit(x, y);
+                int x = (int) Math.round(car.getX());
+                int y = (int) Math.round(car.getY());
+                frame.drawPanel.moveit(car, x, y);
+
+                if ((x > 800 || x < 0) || (y > 800 || y < 0)){
+                    car.turnLeft();
+                    car.turnLeft();
+                }
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
-            }*/
+            }
         }
     }
 
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-       /* for (ACar car : cars
-                ) {
+        for (Car car : cars) {
             car.gas(gas);
-        }*/
+        }
+    }
+    void brake(int amount) {
+        double brake = ((double) amount) / 100;
+        for (Car car : cars) {
+            car.brake(brake);
+        }
     }
 }
