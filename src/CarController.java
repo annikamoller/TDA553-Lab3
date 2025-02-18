@@ -23,6 +23,7 @@ public class CarController {
     CarView frame;
     // A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>();
+    Workshop<Volvo240> volvoWS = new Workshop<>(5, 300.0, 300.0, Volvo240.class);
 
     //methods:
 
@@ -31,6 +32,7 @@ public class CarController {
         CarController cc = new CarController();
 
         Volvo240 volvo = new Volvo240();
+        volvo.setY(300);
         cc.cars.add(volvo);
 
         Saab95 saab = new Saab95();
@@ -39,7 +41,7 @@ public class CarController {
 
         Scania scania = new Scania();
         scania.setY(200);
-        cc.cars.add(new Scania());
+        cc.cars.add(scania);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -60,11 +62,16 @@ public class CarController {
                 car.move();
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
+
                 frame.drawPanel.moveit(car, x, y);
 
                 if ((x > 800 || x < 0) || (y > 800 || y < 0)){
                     car.turnLeft();
                     car.turnLeft();
+                }
+                if(x == volvoWS.getX() && y == volvoWS.getY() && car instanceof Volvo240){
+                    System.out.println(car);
+                    volvoWS.loadCar((Volvo240) car);
                 }
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
@@ -83,6 +90,35 @@ public class CarController {
         double brake = ((double) amount) / 100;
         for (Car car : cars) {
             car.brake(brake);
+        }
+    }
+    void turboOn(){
+        for (Car car : cars){
+            if (car instanceof Saab95){
+                ((Saab95) car).setTurboOn();
+            }
+        }
+    }
+    void turboOff(){
+        for (Car car : cars){
+            if (car instanceof Saab95){
+                ((Saab95) car).setTurboOff();
+            }
+        }
+    }
+
+    void liftBed(){
+        for (Car car : cars){
+            if (car instanceof Scania){
+                ((Scania) car).raisePlatform(35);
+            }
+        }
+    }
+    void lowerBed(){
+        for (Car car : cars){
+            if (car instanceof Scania){
+                ((Scania) car).lowerPlatform(35);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 abstract class Car implements Movable {
     private int nrDoors; // Number of doors on the car
@@ -6,9 +7,11 @@ abstract class Car implements Movable {
     public double currentSpeed; // The current speed of the car
     public Color color; // Color of the car
     private String modelName; // The car model name
+    protected String imageDirectory;
+    private boolean isLoaded = false;
 
-    public double x = 0;
-    public double y = 0;
+    private double x = 0;
+    private double y = 0;
     public enum Direction {
         NORTH,
         EAST,
@@ -54,7 +57,15 @@ abstract class Car implements Movable {
             case WEST : direction = Direction.NORTH; break;
         }
     }
-    
+    public boolean isLoaded(){
+        return isLoaded;
+    }
+
+    public void setIsLoaded(boolean bool){
+        isLoaded = bool;
+    }
+
+    public String getImageDirectory(){return imageDirectory; }
     public double getX(){
         return x;
     }

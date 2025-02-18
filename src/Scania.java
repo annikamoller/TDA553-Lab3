@@ -10,6 +10,7 @@ public class Scania extends Truck implements Dumpy{
         minDumpyAngle = 0;
         maxDumpyAngle = 70;
         currentAngle = 0;
+        imageDirectory = "pics/Scania.jpg";
     }
 
     @Override

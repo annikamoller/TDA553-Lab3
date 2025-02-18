@@ -6,9 +6,15 @@ public class Workshop<T extends Car> {
     private List<T> cars;
     private Class<?>[] acceptableCarTypes;
 
-    public Workshop(int maxCarCapacity,Class<? extends Car>... brands){
+    private double x;
+    private double y;
+
+    public Workshop(int maxCarCapacity,double x, double y,Class<? extends Car>... brands){
+        this.x = x;
+        this.y = y;
         this.maxCarCapacity = maxCarCapacity;
         this.acceptableCarTypes = brands;
+        this.cars = new ArrayList<>();
     }
 
     public void loadCar(T car){
@@ -16,6 +22,7 @@ public class Workshop<T extends Car> {
             if(brand.isInstance(car)){
                 if(cars.size() < maxCarCapacity){
                     cars.add(car);
+                    car.setIsLoaded(true);
                 }else{
                     System.out.println("The Workshop is full!");
                 }
@@ -33,4 +40,7 @@ public class Workshop<T extends Car> {
         }
         return unloadedCar;
     }
+
+    public double getX(){return x;}
+    public double getY(){return y;}
 }
