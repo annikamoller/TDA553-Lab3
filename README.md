@@ -1,5 +1,5 @@
 # Laboration-3
 
-Se Canvas för instruktioner.
 
+## Uppgift 2
 ![screenshot](TDA533_Lab3_Uppgift2.png)
