@@ -2,4 +2,4 @@
 
 Se Canvas för instruktioner.
 
-![screenshot](imageFolder/screenshot.png)
+![screenshot](TDA533_Lab3_Uppgift2.png)
